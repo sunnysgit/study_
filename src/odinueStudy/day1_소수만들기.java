@@ -1,9 +1,6 @@
 package odinueStudy;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
-public class prime_소수만들기 {
+public class day1_소수만들기 {
 
     public static void main(String[] args) {
         int[] nums = {1,2,7,6,4};

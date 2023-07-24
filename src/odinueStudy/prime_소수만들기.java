@@ -32,7 +32,8 @@ public class prime_소수만들기 {
     static boolean chkPrime(int num) {
         boolean chk = true;
 
-        for (int i = 2; i < num; i++) {
+//        for (int i = 2; i <= (int) Math.sqrt(num); i++) {     // => 조금이라도 효율 높이도록 제곱근까지만 계산. num이 100이라면 제곱근인 10까지만 해도 2,5,10 끝.
+        for (int i = 2; i <= num; i++) {
             if (num % i == 0) {
                 chk = false;
             }

@@ -10,18 +10,32 @@ public class day3_피보나치수 {
     //와 같이 이어집니다.
     //
     //2 이상의 n이 입력되었을 때, n번째 피보나치 수를 1234567으로 나눈 나머지를 리턴하는 함수, solution을 완성해 주세요.
+    //n은 2 이상 100,000 이하인 자연수
 
     public static void main(String[] args) {
-        int n = 48;
-        System.out.println(solution(n));
+        int n = 10;
+        System.out.println("배열로 구한 피보나치 수 : " + fiboArr(n));
+        System.out.println("재귀로 구한 피보나치 수 : " + solution(n));
     }
+    // 배열
+    public static int fiboArr(int n) {
+        int[] answer = new int[n + 1];
+        answer[0] = 0;
+        answer[1] = 1;
+
+        for (int i = 2; i <= n; i++){
+            answer[i] = (answer[i-1] + answer[i-2]) %1234567;
+        }
+        return answer[n];
+    }
+    // 재귀
     public static int solution(int n) {
         int answer = 0;
 
         if (n < 2) {
             return n;
         } else {
-            answer = (solution(n-1) + solution(n-2))%1234567;
+            answer = (solution(n-1) + solution(n-2)) %1234567;
         }
 
         return answer;

@@ -13,6 +13,8 @@ public class day1_소수만들기 {
 
     static int answer = 0;
     static  int[] visited;
+    // dfs2 용
+    static ArrayList<Integer> sum = new ArrayList<>();
 
     public static void main(String[] args) {
 //        int[] nums = {1,2,3,4};
@@ -25,12 +27,12 @@ public class day1_소수만들기 {
         System.out.println(dfs(nums, 0, 0, 0));
     }
 
-//    static ArrayList<Integer> sum = new ArrayList<>();
     public static int dfs(int[] nums, int k, int sum, int depth) {
         if (depth == 3) {
             if(chkPrime(sum)) {
                 answer++;
-//                return answer;
+//                return 0;
+                
             }
             sum = 0;
             return 0;
@@ -48,6 +50,13 @@ public class day1_소수만들기 {
         return answer;
     }
 
+    public static int dfs2(int[] nums, int index, int depth) {
+        // nums에서 1개씩 뽑아
+        for (int i = 0; i < nums.length; i++) {
+
+        }
+        return answer;
+    }
 
     static int solution(int[] nums) {
         int answer = 0;

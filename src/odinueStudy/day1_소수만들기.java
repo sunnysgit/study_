@@ -11,19 +11,20 @@ public class day1_소수만들기 {
 //nums에 들어있는 숫자의 개수는 3개 이상 50개 이하입니다.
 //nums의 각 원소는 1 이상 1,000 이하의 자연수이며, 중복된 숫자가 들어있지 않습니다.
 
+    static int answer = 0;
+    static  int[] visited;
 
     public static void main(String[] args) {
 //        int[] nums = {1,2,3,4};
         int[] nums = {1,2,7,6,4};
+        // 3중 for문
+        System.out.println(solution(nums));
 
-//        System.out.println(solution(nums));
-
+        // dfs 활용
         visited = new int[nums.length];
-
         System.out.println(dfs(nums, 0, 0, 0));
     }
-    static int answer = 0;
-    static  int[] visited;
+
 //    static ArrayList<Integer> sum = new ArrayList<>();
     public static int dfs(int[] nums, int k, int sum, int depth) {
         if (depth == 3) {

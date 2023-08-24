@@ -20,11 +20,11 @@ public class day1_소수만들기 {
 //        int[] nums = {1,2,3,4};
         int[] nums = {1,2,7,6,4};
         // 3중 for문
-//        System.out.println("3중 for문 : " + solution(nums));
+        System.out.println("3중 for문 : " + solution(nums));
 
         // dfs 활용
         visited = new int[nums.length];
-//        System.out.println("dfs : " + dfs(nums, 0, 0, 0));
+        System.out.println("dfs : " + dfs(nums, 0, 0, 0));
 
         // dfs2
         System.out.println("dfs2 : " + dfs2(nums, 0, 0));
@@ -53,13 +53,14 @@ public class day1_소수만들기 {
         return answer;
     }
 
+    static int answer2 = 0;
     public static int dfs2(int[] nums, int index, int depth) {
         if (depth == 3) {
             int hap = sum.stream()
                     .mapToInt(Integer::intValue)
                     .sum();
             if (chkPrime(hap)) {
-                answer++;
+                answer2++;
             }
 //            sum.clear();
             return 0;
@@ -74,7 +75,7 @@ public class day1_소수만들기 {
                 visited[i] = 0;
             }
         }
-        return answer;
+        return answer2;
     }
 
     static int solution(int[] nums) {

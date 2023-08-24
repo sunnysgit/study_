@@ -15,16 +15,19 @@ public class day1_소수만들기 {
     static  int[] visited;
     // dfs2 용
     static ArrayList<Integer> sum = new ArrayList<>();
-
+//    static int[] sum = new int[];
     public static void main(String[] args) {
 //        int[] nums = {1,2,3,4};
         int[] nums = {1,2,7,6,4};
         // 3중 for문
-        System.out.println(solution(nums));
+//        System.out.println("3중 for문 : " + solution(nums));
 
         // dfs 활용
         visited = new int[nums.length];
-        System.out.println(dfs(nums, 0, 0, 0));
+//        System.out.println("dfs : " + dfs(nums, 0, 0, 0));
+
+        // dfs2
+        System.out.println("dfs2 : " + dfs2(nums, 0, 0));
     }
 
     public static int dfs(int[] nums, int k, int sum, int depth) {
@@ -51,9 +54,25 @@ public class day1_소수만들기 {
     }
 
     public static int dfs2(int[] nums, int index, int depth) {
+        if (depth == 3) {
+            int hap = sum.stream()
+                    .mapToInt(Integer::intValue)
+                    .sum();
+            if (chkPrime(hap)) {
+                answer++;
+            }
+//            sum.clear();
+            return 0;
+        }
         // nums에서 1개씩 뽑아
-        for (int i = 0; i < nums.length; i++) {
-
+        for (int i = index; i < nums.length; i++) {
+            if (visited[i] == 0) {
+                visited[i] = 1;
+                sum.add(nums[i]);
+                dfs2(nums, i+1, depth+1);
+                sum.remove(sum.size()-1);
+                visited[i] = 0;
+            }
         }
         return answer;
     }

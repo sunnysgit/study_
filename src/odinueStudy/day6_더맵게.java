@@ -13,7 +13,9 @@ public class day6_더맵게 {
     //  모든 음식의 스코빌 지수를 K 이상으로 만들기 위해 섞어야 하는 최소 횟수를 return 하도록 solution 함수를 작성해주세요.
     public static void main(String[] args) {
         int[] scoville = {1, 2, 3, 9, 10, 12};
+//        int[] scoville = {0, 0, 1, 2};
         int K = 7;
+
 
         System.out.println(solution(scoville, K));
 
@@ -45,6 +47,10 @@ public class day6_더맵게 {
                 while (cnt < 2) {
                     min = getMin(nums);
                     minList.add(min);
+                    if (min == -2) {
+                        answer = -1;
+                        return answer;
+                    }
                     index = nums.indexOf(min);
                     nums.remove(index);
                     cnt += 1;
@@ -65,26 +71,9 @@ public class day6_더맵게 {
             }
 
         }
-//         for (int n : nums) {
-//             if ( n < K ) {
-//            // 음식 섞기를 위해서 스코빌지수가 가장 작은 거 2개 뽑기 후 식에 대입.
-//                //최소값 구하기 메서드로 구한 후 그거 제외한 배열 다시 넣어서 2개될때까지 반복.
-//                 do {
-//                     min = getMin(nums);
-//                     minList.add(min);
-//    //                 index = getMin(nums).index;
-//                     index = nums.indexOf(min);
-////                     nums.remove(index);
-//                     cnt += 1;
-//                 } while (cnt < 2);
-//                 newFood = minList.get(0) + (minList.get(1) * 2);
-//                 nums.add(newFood);
-//                 minList.clear();
-//                 cnt = 0;
-//                 answer++;
-//             }
-//
-//         }
+        if (newFood < K) {
+            answer = -1;
+        }
 
         return answer;
     }
@@ -98,10 +87,12 @@ public class day6_더맵게 {
 //    }
     //최소값 구하기.
     static int getMin(List<Integer> nums) {
+        if (nums.size() != 0) {
+            return -2;
+        }
         // 초기값
         min = nums.get(0);
 //        index = 0;
-
         // 최소값 구하기
         for (int i = 0; i < nums.size(); i++) {
             if (nums.get(i) < min) {

@@ -1,6 +1,8 @@
 package odinueStudy;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class day6_더맵게 {
@@ -18,51 +20,93 @@ public class day6_더맵게 {
     }
     static List<Integer> nums = new ArrayList<>();
     static int answer = 0;
+    static List<Integer> minList = new ArrayList<>();
     static int min = 0;
     static int index = 0;
+    static int cnt = 0;
     static int newFood = 0;
 
     //  섞은 음식의 스코빌 지수 = 가장 맵지 않은 음식의 스코빌 지수 + (두 번째로 맵지 않은 음식의 스코빌 지수 * 2)
     public static int solution(int[] scoville, int K) {
-        nums = Arrays.stream(scoville)
-                .boxed()
-                .collect(Collectors.toList());
+//        nums = Arrays.stream(scoville)
+//                .boxed()
+//                .collect(Collectors.toList());
+        for (int n : scoville) {
+            nums.add(n);
+        }
+
+
         // 반복문으로 배열(->리스트)의 각 요소가 K보다 큰지 확인, K보다 작은게 1개라도 있다면 음식섞기.
-         for (int n : nums) {
-             if ( n < K ) {
-            // 음식 섞기를 위해서 스코빌지수가 가장 작은 거 2개 뽑기 후 식에 대입.
-
-                 min = getMin(nums).min;
-                 index = getMin(nums).index;
-
-
-//                 nums.remove()
+        for (int i = nums.size() - 1; i >= 0; i--) {
+            int n = nums.get(i);
+            if ( n < K ) {
+                // 음식 섞기를 위해서 스코빌지수가 가장 작은 거 2개 뽑기 후 식에 대입.
                 //최소값 구하기 메서드로 구한 후 그거 제외한 배열 다시 넣어서 2개될때까지 반복.
+                while (cnt < 2) {
+                    min = getMin(nums);
+                    minList.add(min);
+                    index = nums.indexOf(min);
+                    nums.remove(index);
+                    cnt += 1;
+                }
+//                do {
+//                    min = getMin(nums);
+//                    minList.add(min);
+//                    //                 index = getMin(nums).index;
+//                    index = nums.indexOf(min);
+//                    nums.remove(index);
+//                    cnt += 1;
+//                } while (cnt < 2);
+                newFood = minList.get(0) + (minList.get(1) * 2);
+                nums.add(newFood);
+                minList.clear();
+                cnt = 0;
+                answer += 1;
+            }
 
-             }
-         }
+        }
+//         for (int n : nums) {
+//             if ( n < K ) {
+//            // 음식 섞기를 위해서 스코빌지수가 가장 작은 거 2개 뽑기 후 식에 대입.
+//                //최소값 구하기 메서드로 구한 후 그거 제외한 배열 다시 넣어서 2개될때까지 반복.
+//                 do {
+//                     min = getMin(nums);
+//                     minList.add(min);
+//    //                 index = getMin(nums).index;
+//                     index = nums.indexOf(min);
+////                     nums.remove(index);
+//                     cnt += 1;
+//                 } while (cnt < 2);
+//                 newFood = minList.get(0) + (minList.get(1) * 2);
+//                 nums.add(newFood);
+//                 minList.clear();
+//                 cnt = 0;
+//                 answer++;
+//             }
+//
+//         }
 
         return answer;
     }
-    static class Minimum {
-        public int min;
-        public int index;
-        public Minimum(int min, int index) {
-            this.min = min;
-            this.index = index;
-        }
-    }
+//    static class Minimum {
+//        public int min;
+//        public int index;
+//        public Minimum(int min, int index) {
+//            this.min = min;
+//            this.index = index;
+//        }
+//    }
     //최소값 구하기.
-    static Minimum getMin(List<Integer> nums) {
+    static int getMin(List<Integer> nums) {
         // 초기값
         min = nums.get(0);
-        index = 0;
+//        index = 0;
 
         // 최소값 구하기
         for (int i = 0; i < nums.size(); i++) {
             if (nums.get(i) < min) {
                 min = nums.get(i);
-                index = i;
+//                index = i;
             }
         }
 //        for (int num : nums) {
@@ -71,6 +115,6 @@ public class day6_더맵게 {
 //            }
 //        }
 
-        return new Minimum(min, index);
+        return min;
     }
 }

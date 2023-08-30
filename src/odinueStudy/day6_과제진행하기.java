@@ -60,9 +60,7 @@ public class day6_과제진행하기 {
             // 3. 현재 과제 완료 (=> 시작시간+경과시간이 다음과목 시작시간 보다 작다면 과제 완료니까 end에 넣어.
                 // 현재의 시작시간+경과시간이 다음 과제 시작시간보다 작거나 같다면, 현재 과제는 완료됨.
             if (start+playtime <= startNext) {
-//                end.add(Arrays.toString(plans[i]));
                 end.add(plans[i][0].toString());
-                System.out.println(i + "번 : " + plans[i][0].toString());
 
                 int timeRemaining = startNext - (start+playtime);
 
@@ -73,7 +71,6 @@ public class day6_과제진행하기 {
 
                     // 남은 시간이 꺼낸거의 playtime보다 크거나 같다면, 과제 끝낼 수 있으니까 end에 넣어
                     if (timeRemaining > std.playtime) {
-    //                    end.add(study.toString());
                         end.add(std.name);
                     } else {    // 아니라면 못 끝낸거니까 다시 hold에 넣어, playtime은 남은시간만큼 차감해서 변경해서 넣어!
                         std.playtime = std.playtime - timeRemaining;
@@ -85,33 +82,18 @@ public class day6_과제진행하기 {
             // 마지막 번째 과제는 무조건 끝내는거니까 그냥 end에 넣어주기 (=> 근데 이게 마지막에 1번만 들어가야하는데.. 반복문 돌 때 마다 들어가는 듯..?
 //            end.add(plans[plans.length-1][0]);
         }
-            // 마지막 번째 과제는 반복문 밖에서 넣어주기
+            // => 마지막 번째 과제는 반복문 밖에서 넣어주기
         end.add(plans[plans.length - 1][0]);
-        System.out.println("마지막!");
-        System.out.println(plans[plans.length - 1][0]);
-        System.out.println("마지막!");
-        // 반복
+
         // 5. 모든 과제 한 번씩 탐색했으니, 멈춰둔 과제들 있으면 마지막에 넣었던 것부터 순서대로 꺼내.
         while (!hold.isEmpty()) {
             Study std = hold.pop();
             end.add(std.name);
-            System.out.println("홀딩!");
-            System.out.println(std.name);
-            System.out.println("홀딩!");
         }
         System.out.println("**********************************");
         for (int i = 0; i < end.size(); i++) {
             System.out.println(end.get(i));
         }
-//        for (int i = 0; i < end.size(); i++) {
-//            for (int j = 0; j < 1; j++) {
-//                answer[i] = end.get(i).get(0);
-//            }
-//
-//        }
-//        for(int k = 0; k < end.size(); k++) {
-//            answer[k] = end.get(k);
-//        }
         return Arrays.asList(end.toArray(new String[end.size()]));
     }
 }

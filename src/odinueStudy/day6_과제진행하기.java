@@ -68,11 +68,13 @@ public class day6_과제진행하기 {
                     // 남은 시간이 꺼낸거의 playtime보다 크거나 같다면, 과제 끝낼 수 있으니까 end에 넣어
                     if (timeRemaining >= std.playtime) {
                         end.add(std.name);
+                        // 남은 시간은 사용한 만큼 갱신
                         timeRemaining = timeRemaining - std.playtime;
 
                     } else {    // 아니라면 못 끝낸거니까 다시 hold에 넣어, playtime은 남은시간만큼 차감해서 변경해서 넣어!
                         std.playtime = std.playtime - timeRemaining;
                         hold.push(std);
+                        // 남은 시간을 다 썼으나, 과제를 못 끝낸 상태니까 남은 시간 = 0 처리 => 반복문 나가기
                         timeRemaining = 0;
                     }
                 }

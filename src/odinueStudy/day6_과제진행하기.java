@@ -52,29 +52,29 @@ public class day6_과제진행하기 {
             // 2-1. 아직 안 끝났는데, 다음 과제 시간이 된다면, 과제를 멈추고(stack에 넣고) 1번으로 돌아감.
                 // 현재의 시작시간+경과시간이 다음 과제의 시작시간보다 크다면 못 끝난채로 hold에 보관해야함. playtime은 경과시간 차감해서 넣어줘여함.
             if (start+playtime > startNext) {
-                hold.push(new Study(plans[i][0].toString(), start, playtime-(startNext-start)));
-                System.out.println(i + "번 : " + plans[i][0].toString());
-                System.out.println(playtime-(startNext-start));
+                hold.push(new Study(plans[i][0], start, playtime-(startNext-start)));
             }
 
             // 3. 현재 과제 완료 (=> 시작시간+경과시간이 다음과목 시작시간 보다 작다면 과제 완료니까 end에 넣어.
                 // 현재의 시작시간+경과시간이 다음 과제 시작시간보다 작거나 같다면, 현재 과제는 완료됨.
             if (start+playtime <= startNext) {
-                end.add(plans[i][0].toString());
+                end.add(plans[i][0]);
 
                 int timeRemaining = startNext - (start+playtime);
 
                 // 4. 현재 과제 완료하고도, 다음 과제 시작 전까지 시간이 남으면서 멈춰둔 과제가 있어? 그러면 stack에 넣어둔 과제 다시 꺼내.
-                if (timeRemaining > 0 && !hold.isEmpty()) {
+                while (timeRemaining > 0 && !hold.isEmpty()) {
                     Study std = hold.pop();
-
 
                     // 남은 시간이 꺼낸거의 playtime보다 크거나 같다면, 과제 끝낼 수 있으니까 end에 넣어
                     if (timeRemaining >= std.playtime) {
                         end.add(std.name);
+                        timeRemaining = timeRemaining - std.playtime;
+
                     } else {    // 아니라면 못 끝낸거니까 다시 hold에 넣어, playtime은 남은시간만큼 차감해서 변경해서 넣어!
                         std.playtime = std.playtime - timeRemaining;
                         hold.push(std);
+                        timeRemaining = 0;
                     }
                 }
 

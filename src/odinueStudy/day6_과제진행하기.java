@@ -90,10 +90,7 @@ public class day6_과제진행하기 {
             Study std = hold.pop();
             end.add(std.name);
         }
-        System.out.println("**********************************");
-        for (int i = 0; i < end.size(); i++) {
-            System.out.println(end.get(i));
-        }
+
         return Arrays.asList(end.toArray(new String[end.size()]));
     }
 }

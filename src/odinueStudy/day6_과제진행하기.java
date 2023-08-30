@@ -31,7 +31,6 @@ public class day6_과제진행하기 {
     }
 
     public static List<String> solution(String[][] plans) {
-        String[] answer = new String[plans.length-1];
         List<String> end = new ArrayList<String>();
         // start 시작 시간 순으로 정렬 필요
         Arrays.sort(plans, Comparator.comparing((String[] o) -> o[1]));

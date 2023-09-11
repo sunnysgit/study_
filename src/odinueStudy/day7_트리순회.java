@@ -37,7 +37,7 @@ public class day7_트리순회 {
             createNode(data, left, right);
         }
 
-        d.preOrder(d.root);
+        preOrder(d.root);
 
 
     }

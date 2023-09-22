@@ -38,6 +38,10 @@ public class day7_트리순회 {
         }
 
         preOrder(d.root);
+        System.out.println();
+        inOrder(d.root);
+        System.out.println();
+        postOrder(d.root);
 
 
     }
@@ -62,11 +66,11 @@ public class day7_트리순회 {
     private static void searchNode(Node node, String data, String left, String right) {
         if (node == null) {     //도착한 노드가 null이면 재귀 종료 - 찾을 노드 X
             return;
-        } else if (node.data == data) {     // 들어갈 노드, 일치하는 노드가 있다면
-            if (left != ".") {
+        } else if (node.data.equals(data)) {     // 들어갈 노드, 일치하는 노드가 있다면
+            if (!left.equals(".")) {
                 node.left = new Node(left);
             }
-            if (right != ".") {
+            if (!right.equals(".")) {
                 node.right = new Node(right);
             }
         } else {     // 아직 찾지 못했고, 탐색할 노드가 남아있다면
@@ -95,7 +99,7 @@ public class day7_트리순회 {
             if (node.left != null) {
                 inOrder(node.left);
             }
-            System.out.println(node.data);
+            System.out.print(node.data);
             if (node.right != null) {
                 inOrder(node.right);
             }
@@ -110,7 +114,7 @@ public class day7_트리순회 {
             if (node.right != null) {
                 postOrder(node.right);
             }
-            System.out.println(node.data);
+            System.out.print(node.data);
         }
     }
 

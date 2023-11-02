@@ -4,10 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.StringTokenizer;
+import java.util.*;
 
 //        =>  받아서 저장해야하는데, 이걸 미리 구해두는 것보단 깊이탐색 돌면서 그때그때 하는게 낫나..?
 //        근데 건너건너서 연결되는건 어떻게하지? => 그냥 위에 usado정리된 배열만 탐색하면 되므로 신경 X
@@ -20,6 +17,7 @@ import java.util.StringTokenizer;
 //        2. 한 번이라도 연산이 수행된 정점을 방문처리할 배열.
 //        3. 큐에 초기값 삽입(입력 값의 질문으로 주어짐) 및 방문처리.
 //        4. bfs 시작 -> k이상인 것들 카운트, 큐에 추가, 방문 처리.
+
 public class round9_Mootube {
     static class Node {
         int video;
@@ -40,6 +38,10 @@ public class round9_Mootube {
         // 비디오 별로 usado 정리
         ArrayList<Node>[] graph = new ArrayList[N+1];
         for (int i = 1; i <= N; i++) {
+            graph[i] = new ArrayList<>();
+        }
+
+        for (int i = 1; i < N; i++) {
             st = new StringTokenizer(br.readLine());
 
             int p = Integer.parseInt(st.nextToken());
@@ -65,25 +67,30 @@ public class round9_Mootube {
 
     }
 
-    private static int bfs(int k, int v, ArrayList<Node>[] graph, int N) { // 1, 2
+    private static int bfs(int k, int v, ArrayList<Node>[] graph, int N) {
         int cnt = 0;
-        int[] visited = new int[N+1];   // 1, 2, 3, 4 방문 비디오 체크
+        boolean[] visited = new boolean[N+1];   // 1, 2, 3, 4 방문 비디오 체크
         Queue<Integer> queue = new LinkedList<>();
         queue.add(v);
-        visited[v] = 1;
+        visited[v] = true;
 
         while(!queue.isEmpty()) {
+            int now = queue.poll();
+            List<Node> list = graph[now];
 
+            for (int i = 0; i < list.size(); i++) {
+                if (visited[list.get(i).video]) {
+                    continue;
+                }
+                if (list.get(i).usado < k) {
+                    continue;
+                }
+                // 유사도가 k 이상이고 아직 확인하지 않은 영상의 경우만 큐에 넣고 유사한 동영상 개수를 1증가
+                cnt++;
+                queue.offer(list.get(i).video);
+                visited[list.get(i).video] = true;
+            }
         }
-
-
-            // 1. array의 p또는 q에 v있는지 확인
-                // 1-1. 있다면 array의 usado가 k보다 큰지 확인 후 한번 더 연결된게 있는지 확인 반복해야함.
-                    // 1-1-1. 크다면 cnt+1
-                    // 1-1-3. 한번 더 bfs 돌면서 또 있는지 확인
-                    // 1-1-2. 작다면 계속 돌기.
-                // 1-2. 없다면 빠져나가기.
-
         return cnt;
     }
 }

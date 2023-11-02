@@ -7,10 +7,10 @@ import java.util.Arrays;
 import java.util.StringTokenizer;
 /*10 5
 3 -2 -4 -9 0 3 7 13 8 -3
-답 21*/
+답 31*/
 /*10 2
 3 -2 -4 -9 0 3 7 13 8 -3
-답 31*/
+답 21*/
 public class round9_수열 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));

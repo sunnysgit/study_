@@ -35,19 +35,18 @@ public class round9_Mootube {
         int N = Integer.parseInt(st.nextToken());   // 영상 개수
         int Q = Integer.parseInt(st.nextToken());   // 질문 개수
 
-        // 비디오 별로 usado 정리
+        // 비디오 별로 usado 정리할 공간 만들어주기
         ArrayList<Node>[] graph = new ArrayList[N+1];
         for (int i = 1; i <= N; i++) {
             graph[i] = new ArrayList<>();
         }
-
         for (int i = 1; i < N; i++) {
             st = new StringTokenizer(br.readLine());
 
             int p = Integer.parseInt(st.nextToken());
             int q = Integer.parseInt(st.nextToken());
             int u = Integer.parseInt(st.nextToken());
-
+            // 양방향 탐색 가능하도록 (양방향 탐색 - 도착점과 시작점에서 동시에 탐색 시작)
             graph[p].add(new Node(q, u));
             graph[q].add(new Node(p, u));
         }
@@ -60,7 +59,6 @@ public class round9_Mootube {
             int v = Integer.parseInt(st.nextToken());
 
             int cnt = bfs(k, v, graph, N);
-//            System.out.println(cnt);
             sb.append(cnt).append("\n");
         }
         System.out.println(sb.toString());
@@ -69,7 +67,7 @@ public class round9_Mootube {
 
     private static int bfs(int k, int v, ArrayList<Node>[] graph, int N) {
         int cnt = 0;
-        boolean[] visited = new boolean[N+1];   // 1, 2, 3, 4 방문 비디오 체크
+        boolean[] visited = new boolean[N+1];
         Queue<Integer> queue = new LinkedList<>();
         queue.add(v);
         visited[v] = true;

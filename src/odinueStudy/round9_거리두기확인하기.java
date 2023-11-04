@@ -3,7 +3,7 @@ package odinueStudy;
 import java.util.Arrays;
 
 // 1. 탐색을 위해 2차원 배열로 만들어주기
-// 2-1. P가 있는 경우 => P를 기준으로 8방 탐색
+// 2-1. P가 있는 경우 => P를 기준으로 4방 탐색
     // 2-1-1. P => return 0
     // 2-1-2. X => return 1
     // 2-1-3. O
